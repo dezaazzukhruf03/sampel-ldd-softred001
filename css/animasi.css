@@ -1,0 +1,72 @@
+/* ==========================================
+   KEYFRAME ANIMATIONS
+   ========================================= */
+
+/* Spinner Preloader (sudah tidak dipakai di HTML, disimpan jika suatu saat dibutuhkan) */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Preloader: Teks "Loading..." berdenyut halus (seluruh teks, termasuk titik-titik) */
+@keyframes pulseText {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Fade Out Cover Screen */
+.slide-up-fade {
+  animation: coverFadeOut 0.9s ease forwards;
+}
+
+@keyframes coverFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* Fade Out Preloader */
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* Toast Slide In */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Fade Up saat section masuk viewport (dikontrol lewat script.js + class .in-view) */
+.fade-up-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-up-section.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}

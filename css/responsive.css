@@ -1,0 +1,86 @@
+/* ==========================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================== */
+
+/* Tablet & Mobile (Max Width: 768px) */
+@media screen and (max-width: 768px) {
+
+  /* Restrukturisasi Navigasi Samping menjadi Floating Bottom Navigation */
+  .side-nav {
+    top: auto;
+    bottom: 20px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    border-radius: 30px;
+    width: max-content;
+    position: fixed;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .side-nav ul {
+    flex-direction: row;
+    gap: 12px;
+    padding-top: 0;
+    padding-left: 12px;
+    border-top: none;
+    border-left: 1px solid rgba(194, 89, 91, 0.15);
+  }
+
+  .side-nav a {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+
+  .side-nav .music-toggle-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+
+  /* Adjust Countdown Size */
+  .countdown-wrapper {
+    gap: 8px;
+  }
+
+  .countdown-item {
+    min-width: 60px;
+    padding: 10px;
+  }
+
+  .countdown-item span {
+    font-size: 1.4rem;
+  }
+
+  /* Kartu ATM Mobile */
+  .atm-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .couple-name {
+    font-size: 2.3rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* Small Mobile (Max Width: 480px) */
+@media screen and (max-width: 480px) {
+  .section {
+    padding: 60px 16px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rsvp-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
