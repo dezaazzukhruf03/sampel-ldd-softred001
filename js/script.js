@@ -26,6 +26,31 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ------------------------------------------
+  // 0a. REVEAL BERTAHAP UNTUK TIMELINE LOVE STORY
+  //     Setiap item muncul satu-per-satu (staggered) saat masuk viewport
+  // ------------------------------------------
+  const timelineItems = document.querySelectorAll('.timeline-item');
+
+  if ('IntersectionObserver' in window && timelineItems.length) {
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          timelineObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    timelineItems.forEach((item, index) => {
+      // Jeda animasi bertingkat: item ke-2 & ke-3 muncul menyusul lebih lambat
+      item.style.transitionDelay = (index * 0.15) + 's';
+      timelineObserver.observe(item);
+    });
+  } else {
+    timelineItems.forEach(item => item.classList.add('in-view'));
+  }
+
+  // ------------------------------------------
   // 0b. AUTO SCROLL PERLAHAN
   //     Dipakai saat "Buka Undangan" diklik, DAN oleh tombol
   //     Auto-Scroll manual (#autoscroll-btn).

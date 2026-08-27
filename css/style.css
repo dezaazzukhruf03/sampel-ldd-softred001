@@ -571,10 +571,37 @@ body.no-scroll {
   border-left: 2px solid var(--primary);
 }
 
+/* Hiasan hati berdenyut di ujung bawah garis timeline */
+.timeline::after {
+  content: "\f004"; /* fa-heart */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: -11px;
+  bottom: -6px;
+  font-size: 0.75rem;
+  color: var(--primary);
+  animation: pulseHeart 1.6s ease-in-out infinite;
+}
+
 .timeline-item {
   position: relative;
   margin-bottom: 32px;
   padding-left: 24px;
+
+  /* Reveal bertahap satu-per-satu saat masuk viewport (lihat script.js) */
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.timeline-item.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
 }
 
 .timeline-dot {
@@ -589,24 +616,48 @@ body.no-scroll {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: var(--shadow);
+  z-index: 2;
 }
 
-.timeline-dot::before {
-  content: "\f5bb"; /* fa-spa */
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
+.timeline-dot i {
   font-size: 0.6rem;
   color: var(--primary);
 }
 
 .timeline-content {
+  position: relative;
+  overflow: hidden;
   background: var(--white);
   padding: 20px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Nomor urut besar & transparan sebagai aksen dekoratif */
+.timeline-number {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  font-family: var(--font-title);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--primary-light);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
 }
 
 .timeline-date {
+  position: relative;
+  z-index: 1;
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--primary);
@@ -615,12 +666,16 @@ body.no-scroll {
 }
 
 .timeline-content h4 {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-title);
   margin: 6px 0;
   color: var(--text-main);
 }
 
 .timeline-content p {
+  position: relative;
+  z-index: 1;
   font-size: 0.9rem;
   color: var(--text-muted);
 }
@@ -651,6 +706,25 @@ body.no-scroll {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   border-top: 4px solid var(--primary);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.event-icon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
 }
 
 .event-card h3 {
@@ -664,6 +738,85 @@ body.no-scroll {
   color: var(--text-muted);
   margin-bottom: 8px;
   font-size: 0.95rem;
+}
+
+/* Baris tombol aksi: Simpan Kalender & Lihat Maps */
+.event-actions {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(194, 89, 91, 0.25);
+}
+
+.btn-event-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--white);
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-event-action:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+/* Dropdown pilihan kalender (Google Calendar / unduh .ics) */
+.calendar-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 210px;
+  z-index: 20;
+  animation: dropdownFadeIn 0.2s ease;
+}
+
+.calendar-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-main);
+  text-decoration: none;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.calendar-option i {
+  width: 16px;
+  text-align: center;
+  color: var(--primary);
+}
+
+.calendar-option:hover {
+  background-color: var(--primary-light);
 }
 
 .map-wrapper {
