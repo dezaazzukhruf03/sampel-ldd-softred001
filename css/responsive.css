@@ -6,17 +6,13 @@
 @media screen and (max-width: 768px) {
 
   /* Restrukturisasi Navigasi Samping menjadi Floating Bottom Navigation */
-  .side-nav {
-    top: auto;
+  .floating-controls {
     bottom: 20px;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
+    gap: 6px;
+  }
+
+  .side-nav {
     padding: 8px 16px;
-    border-radius: 30px;
-    width: max-content;
-    position: fixed;
-    flex-direction: row;
     gap: 10px;
   }
 
@@ -35,7 +31,7 @@
     font-size: 0.95rem;
   }
 
-  .side-nav .music-toggle-btn {
+  .floating-controls .music-toggle-btn {
     width: 34px;
     height: 34px;
     font-size: 1rem;

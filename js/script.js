@@ -26,9 +26,30 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ------------------------------------------
-  // 0b. AUTO SCROLL PERLAHAN (dipakai saat "Buka Undangan" diklik)
+  // 0b. AUTO SCROLL PERLAHAN
+  //     Dipakai saat "Buka Undangan" diklik, DAN oleh tombol
+  //     Auto-Scroll manual (#autoscroll-btn).
+  //     Auto-scroll TETAP JALAN walau layar disentuh/discroll manual —
+  //     hanya berhenti/mulai lewat klik tombol #autoscroll-btn.
   // ------------------------------------------
-  function smoothAutoScroll(targetY, duration) {
+  const autoScrollBtn = document.getElementById('autoscroll-btn');
+  let stopActiveAutoScroll = null; // referensi fungsi stop dari sesi auto-scroll yang sedang berjalan
+  let isAutoScrolling = false;
+
+  function setAutoScrollButtonState(active) {
+    isAutoScrolling = active;
+    if (!autoScrollBtn) return;
+    autoScrollBtn.classList.toggle('active', active);
+    autoScrollBtn.innerHTML = active
+      ? '<i class="fa-solid fa-pause"></i>'
+      : '<i class="fa-solid fa-arrow-down-long"></i>';
+    autoScrollBtn.title = active ? 'Hentikan Auto-Scroll' : 'Mulai Auto-Scroll';
+  }
+
+  function smoothAutoScroll(targetY, duration, onEnd) {
+    // Jika ada sesi auto-scroll lain yang masih jalan, hentikan dulu
+    if (stopActiveAutoScroll) stopActiveAutoScroll();
+
     const htmlEl = document.documentElement;
     const previousScrollBehavior = htmlEl.style.scrollBehavior;
 
@@ -49,17 +70,12 @@ document.addEventListener('DOMContentLoaded', function () {
       if (cancelled) return;
       cancelled = true;
       restoreScrollBehavior();
-      window.removeEventListener('wheel', stopAutoScroll);
-      window.removeEventListener('touchstart', stopAutoScroll);
-      window.removeEventListener('pointerdown', stopAutoScroll);
-      window.removeEventListener('keydown', stopAutoScroll);
+      stopActiveAutoScroll = null;
+      setAutoScrollButtonState(false);
+      if (typeof onEnd === 'function') onEnd();
     }
 
-    // Auto-scroll langsung berhenti begitu tamu menyentuh/scroll layar sendiri
-    window.addEventListener('wheel', stopAutoScroll, { passive: true });
-    window.addEventListener('touchstart', stopAutoScroll, { passive: true });
-    window.addEventListener('pointerdown', stopAutoScroll, { passive: true });
-    window.addEventListener('keydown', stopAutoScroll);
+    stopActiveAutoScroll = stopAutoScroll;
 
     function step(now) {
       if (cancelled) return;
@@ -81,6 +97,34 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     requestAnimationFrame(step);
+    setAutoScrollButtonState(true);
+  }
+
+  // Toggle manual lewat tombol di side-nav
+  if (autoScrollBtn) {
+    autoScrollBtn.addEventListener('click', function () {
+      // Jika sedang auto-scroll, klik = berhenti
+      if (isAutoScrolling && stopActiveAutoScroll) {
+        stopActiveAutoScroll();
+        return;
+      }
+
+      // Jika belum, klik = mulai scroll perlahan dari posisi sekarang sampai paling bawah
+      const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+      const remaining = maxScroll - window.scrollY;
+
+      if (remaining < 10) {
+        if (typeof showToast === 'function') {
+          showToast('Anda sudah berada di bagian paling bawah.');
+        }
+        return;
+      }
+
+      const scrollSpeed = 40; // px per detik (semakin kecil = semakin perlahan & khidmat)
+      const duration = Math.max((remaining / scrollSpeed) * 1000, 5000);
+
+      smoothAutoScroll(maxScroll, duration);
+    });
   }
 
   // ------------------------------------------
@@ -108,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ------------------------------------------
   const btnOpen = document.getElementById('btn-open-invitation');
   const coverScreen = document.getElementById('cover-screen');
-  const sideNav = document.getElementById('side-nav');
+  const floatingControls = document.getElementById('floating-controls');
   const mainContent = document.getElementById('main-content');
 
   if (btnOpen) {
@@ -124,9 +168,9 @@ document.addEventListener('DOMContentLoaded', function () {
         mainContent.classList.remove('locked');
       }
 
-      // 3. Tampilkan Navigasi Samping & Play Audio
-      if (sideNav) {
-        sideNav.classList.remove('hidden');
+      // 3. Tampilkan Tombol Musik & Navigasi Bawah, lalu Play Audio
+      if (floatingControls) {
+        floatingControls.classList.remove('hidden');
       }
 
       // Memutar musik (fungsi dari music.js)

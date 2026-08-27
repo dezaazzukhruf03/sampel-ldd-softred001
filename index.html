@@ -37,21 +37,29 @@
     Browser Anda tidak mendukung elemen audio.
   </audio>
 
-  <!-- FLOATING SIDE NAVIGATION (termasuk tombol musik) -->
-  <nav id="side-nav" class="side-nav hidden">
+  <!-- WADAH KONTROL MENGAMBANG: Tombol Musik (atas) + Navigasi Bawah -->
+  <div id="floating-controls" class="floating-controls hidden">
+    <!-- Tombol Musik: nempel di kanan-atas, tepat di atas navbar -->
     <button id="music-btn" class="music-toggle-btn" title="Putar/Jeda Musik">
       <i class="fa-solid fa-compact-disc fa-spin"></i>
     </button>
-    <ul>
-      <li><a href="#beranda" class="nav-link active" title="Beranda"><i class="fa-solid fa-house"></i></a></li>
-      <li><a href="#mempelai" class="nav-link" title="Mempelai"><i class="fa-solid fa-heart"></i></a></li>
-      <li><a href="#story" class="nav-link" title="Love Story"><i class="fa-solid fa-book-open"></i></a></li>
-      <li><a href="#acara" class="nav-link" title="Acara"><i class="fa-solid fa-calendar-days"></i></a></li>
-      <li><a href="#galeri" class="nav-link" title="Galeri"><i class="fa-solid fa-images"></i></a></li>
-      <li><a href="#gift" class="nav-link" title="Hadiah"><i class="fa-solid fa-gift"></i></a></li>
-      <li><a href="#rsvp" class="nav-link" title="RSVP"><i class="fa-solid fa-pen-to-square"></i></a></li>
-    </ul>
-  </nav>
+
+    <!-- FLOATING SIDE NAVIGATION -->
+    <nav id="side-nav" class="side-nav">
+      <button id="autoscroll-btn" class="music-toggle-btn autoscroll-toggle-btn" title="Mulai Auto-Scroll">
+        <i class="fa-solid fa-arrow-down-long"></i>
+      </button>
+      <ul>
+        <li><a href="#beranda" class="nav-link active" title="Beranda"><i class="fa-solid fa-house"></i></a></li>
+        <li><a href="#mempelai" class="nav-link" title="Mempelai"><i class="fa-solid fa-heart"></i></a></li>
+        <li><a href="#story" class="nav-link" title="Love Story"><i class="fa-solid fa-book-open"></i></a></li>
+        <li><a href="#acara" class="nav-link" title="Acara"><i class="fa-solid fa-calendar-days"></i></a></li>
+        <li><a href="#galeri" class="nav-link" title="Galeri"><i class="fa-solid fa-images"></i></a></li>
+        <li><a href="#gift" class="nav-link" title="Hadiah"><i class="fa-solid fa-gift"></i></a></li>
+        <li><a href="#rsvp" class="nav-link" title="RSVP"><i class="fa-solid fa-pen-to-square"></i></a></li>
+      </ul>
+    </nav>
+  </div>
 
 <!-- 2. COVER SCREEN (Lock Screen) -->
 <section id="cover-screen">
@@ -379,6 +387,7 @@
   <script src="js/music.js"></script>
   <script src="js/countdown.js"></script>
   <script src="js/gallery.js"></script>
+  <script src="js/lightbox.js"></script>
   <script src="js/reservation.js"></script>
   <script src="js/script.js"></script>
 </body>
