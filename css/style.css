@@ -51,6 +51,27 @@ body.no-scroll {
   overflow-x: hidden;
 }
 
+.bunga-mekar {
+  position: absolute;
+  width: 150px;
+  height: auto;
+  opacity: 0.55;
+}
+
+.pucuk-bunga {
+  position: absolute;
+  width: 150px;
+  height: auto;
+  opacity: 0.55;
+}
+
+.rangkaian-bunga {
+  position: absolute;
+  width: 150px;
+  height: auto;
+  opacity: 0.50;
+}
+
 /* ==========================================
    PRELOADER
    ========================================== */
@@ -94,7 +115,7 @@ body.no-scroll {
 }
 
 .browser-notice i {
-  color: #4285f4;
+  color: var(--primary);
 }
 
 /* ==========================================
@@ -136,98 +157,6 @@ body.no-scroll {
   padding: 24px;
 }
 
-.subtitle {
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-bottom: 16px;
-}
-
-#cover-screen .subtitle {
-  margin-bottom: 50px;
-}
-
-.beranda-photo-wrap {
-  position: relative;
-  width: 200px;
-  margin: 0 auto 20px;
-}
-
-.beranda-photo {
-  width: 200px;
-  height: 300px;
-  margin: 0;
-  border-radius: 100px 100px 20px 20px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  border: 4px solid var(--white);
-  position: relative;
-}
-
-.beranda-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.beranda-photo-flower {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.3rem;
-  color: var(--white);
-  opacity: 0.85;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
-}
-
-.beranda-photo-side-flower {
-  position: absolute;
-  top: 40%;
-  transform: translateY(-50%);
-  width: 130px;
-  height: auto;
-  opacity: 0.7;
-  pointer-events: none;
-  overflow: visible;
-}
-
-.beranda-photo-side-flower-top {
-  top: 70%;
-}
-
-.beranda-photo-side-flower-bottom {
-  top: 70%;
-}
-
-.beranda-photo-side-flower-left {
-  left: -90px;
-}
-
-.beranda-photo-side-flower-right {
-  right: -90px;
-  transform: translateY(-50%) scaleX(-1);
-}
-
-.title-primary {
-  font-family: var(--font-title);
-  font-size: 2.5rem;
-  margin-bottom: 8px;
-  color: var(--primary);
-}
-
-.couple-name {
-  font-family: var(--font-title);
-  font-size: 2.5rem;
-  margin-bottom: 8px;
-  color: var(--white);
-}
-
-.wedding-date {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-  font-weight: 300;
-}
-
 .guest-box {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(8px);
@@ -237,14 +166,39 @@ body.no-scroll {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.guest-box p {
-  font-size: 0.9rem;
+.subtitle {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+.couple-name {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+
+.wedding-date {
+  position: relative;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.guest-box .guest-title {
+  font-size: 0.85rem;
 }
 
 .guest-box h3 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin-top: 4px;
   font-family: var(--font-title);
+}
+
+.guest-note {
+  margin-top: 4px;
+  font-size: 0.5rem;
 }
 
 .btn-open {
@@ -264,17 +218,157 @@ body.no-scroll {
   transform: translateY(-2px);
 }
 
-/* Utility Class untuk menyembunyikan elemen */
-.hidden {
-  display: none !important;
+/* ==========================================
+   BERANDA
+   ========================================== */
+
+#beranda {
+  /* Tinggi section Beranda diatur lewat 1 variable ini saja.
+     Mau lebih tinggi/pendek? ubah nilai --beranda-height di bawah.
+     Contoh: 90vh, 100dvh, atau auto (mengikuti tinggi konten). */
+  --beranda-height: 100dvh;
+  min-height: var(--beranda-height);
+
+  /* Menjadikan kontainer fleksibel secara vertikal */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Memposisikan konten di tengah secara vertikal */
+  align-items: center;     /* Memposisikan konten di tengah secara horizontal */
+
+  position: relative;
+  /* overflow:hidden DIHAPUS: gambar dekorasi (.section-side-flower) tingginya
+     mengikuti rasio aslinya, jadi kalau section ini dibuat pendek, gambar bisa
+     lebih tinggi dari box-nya. Kalau overflow disembunyikan, bagian atas/bawah
+     gambar akan terpotong. Pemotongan horizontal tetap aman karena
+     .mobile-wrapper sudah punya overflow-x:hidden secara global. */
+
+  /* Mengatur jarak dalam agar konten tidak menempel ke pinggir layar */
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
 
+/* Memastikan kontainer di dalamnya ikut fleksibel */
+#beranda .container {
+  margin-top: -20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+#beranda .pucuk-bunga.kiri {
+  top: 06%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 0%;
+}
+
+#beranda .pucuk-bunga.kanan {
+  top: 06%;
+  pointer-events: none;
+  z-index: 0;
+  right: 0%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#beranda .rangkaian-bunga.atas-kiri {
+  top: 16%;
+  transform: translateY(-50%);
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#beranda .rangkaian-bunga.atas-kanan {
+  top: 16%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+}
+
+#beranda .bunga-mekar.kiri {
+  top: 87%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 5%;
+}
+
+#beranda .bunga-mekar.kanan {
+  top: 87%;
+  pointer-events: none;
+  z-index: 0;
+  right: 5%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#beranda .rangkaian-bunga.bawah-kiri {
+  top: 80%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1) scaleY(-1);
+}
+
+#beranda .rangkaian-bunga.bawah-kanan {
+  top: 80%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+  transform: translateY(-50%) scaley(-1);
+}
+
+#beranda .beranda-photo-wrap {
+  position: relative;
+  width: 200px;
+  margin: 0 auto 20px;
+}
+
+.beranda-photo {
+  width: 200px;
+  height: 300px;
+  border-radius: 100px 100px 20px 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 4px solid var(--white);
+  position: relative;
+}
+
+.beranda-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#beranda .subtitle {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+
+#beranda .bride-groom-name {
+  margin-top: 2px;
+  font-family: var(--font-title);
+  font-size: 2.2rem;
+  color: var(--primary);
+}
+
+#beranda .event-date {
+  width: 200px;
+  margin: 0 auto 20px;
+}
 /* ==========================================
    AUDIO TOGGLE BUTTON (bagian dari side-nav)
    ========================================== */
 .music-toggle-btn {
-  width: 38px;
-  height: 38px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background-color: var(--primary);
   color: var(--white);
@@ -291,32 +385,24 @@ body.no-scroll {
 
 /* ==========================================
    WADAH KONTROL MENGAMBANG
-   Membungkus tombol musik + navbar bawah jadi satu,
-   supaya keduanya tetap berada di dalam frame
-   .mobile-wrapper (tidak lari ke pojok layar asli saat
-   preview di layar lebar) dan posisinya selalu berdekatan.
    ========================================== */
 .floating-controls {
   position: fixed;
   left: 50%;
-  bottom: 24px;
+  bottom: 0px;
   transform: translateX(-50%);
   z-index: 4000;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* tombol musik nempel di kanan-atas, tepat di atas navbar */
+  align-items: flex-end;
   gap: 8px;
 }
 
-/* ==========================================
-   FLOATING SIDE NAVIGATION
-   (posisi sudah diatur oleh .floating-controls di atas)
-   ========================================== */
 .side-nav {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
-  padding: 12px 8px;
-  border-radius: 30px;
+  padding: 8px 8px;
+  border-radius: 0px;
   box-shadow: var(--shadow);
   border: 1px solid rgba(194, 89, 91, 0.15);
   display: flex;
@@ -329,9 +415,6 @@ body.no-scroll {
   margin-bottom: 2px;
 }
 
-/* ==========================================
-   AUTO-SCROLL TOGGLE BUTTON (bagian dari side-nav)
-   ========================================== */
 .autoscroll-toggle-btn {
   background-color: var(--white);
   color: var(--primary);
@@ -376,6 +459,7 @@ body.no-scroll {
    MAIN LAYOUT & SECTIONS
    ========================================== */
 .section {
+  min-height: var(--section-height, auto);
   padding: 80px 20px;
   max-width: 1000px;
   margin: 0 auto;
@@ -385,26 +469,6 @@ body.no-scroll {
 .container {
   position: relative;
   z-index: 1;
-}
-
-.section-side-flower {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 150px;
-  height: auto;
-  opacity: 0.55;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.section-side-flower-left {
-  left: -10px;
-}
-
-.section-side-flower-right {
-  right: -10px;
-  transform: translateY(-50%) scaleX(-1);
 }
 
 .bg-light {
@@ -420,7 +484,7 @@ body.no-scroll {
 }
 
 .section-title::after {
-  content: "\f5bb"; /* fa-spa */
+  content: "\f5bb";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   display: block;
@@ -441,11 +505,77 @@ body.no-scroll {
 }
 
 /* ==========================================
-   BERANDA & COUNTDOWN
+   MEMPELAI
    ========================================== */
+
+#mempelai .pucuk-bunga.kiri {
+  top: -1.1%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 0%;
+}
+
+#mempelai .pucuk-bunga.kanan {
+  top: -1.1%;
+  pointer-events: none;
+  z-index: 0;
+  right: 0%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#mempelai .rangkaian-bunga.atas-kiri {
+  top: 5%;
+  transform: translateY(-50%);
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#mempelai .rangkaian-bunga.atas-kanan {
+  top: 5%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+}
+
+#mempelai .bunga-mekar.kiri {
+  top: 96%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 5%;
+}
+
+#mempelai .bunga-mekar.kanan {
+  top: 96%;
+  pointer-events: none;
+  z-index: 0;
+  right: 5%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#mempelai .rangkaian-bunga.bawah-kiri {
+  top: 90%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1) scaleY(-1);
+}
+
+#mempelai .rangkaian-bunga.bawah-kanan {
+  top: 90%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+  transform: translateY(-50%) scaley(-1);
+}
+
 .quotes-box {
-  margin: 36px auto;
-  max-width: 650px;
+  margin: 24px auto 36px;
   background: var(--white);
   padding: 24px;
   border-radius: var(--radius);
@@ -455,8 +585,7 @@ body.no-scroll {
 
 .quote-icon {
   font-size: 1.8rem;
-  color: var(--primary-light);
-  margin-bottom: 12px;
+  color: var(--primary);
 }
 
 .quotes-text {
@@ -472,39 +601,6 @@ body.no-scroll {
   font-size: 0.85rem;
 }
 
-.countdown-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 32px;
-}
-
-.countdown-item {
-  background: var(--white);
-  padding: 16px;
-  min-width: 75px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(194, 89, 91, 0.1);
-}
-
-.countdown-item span {
-  display: block;
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--primary);
-  font-family: var(--font-title);
-}
-
-.countdown-item small {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-}
-
-/* ==========================================
-   MEMPELAI
-   ========================================== */
 .couple-grid {
   display: flex;
   align-items: center;
@@ -552,17 +648,76 @@ body.no-scroll {
   color: var(--primary);
 }
 
-#mempelai .section-side-flower-left {
-  top: 65%;
-}
-
-#mempelai .section-side-flower-right {
-  top: 65%;
-}
-
 /* ==========================================
    LOVE STORY (TIMELINE)
    ========================================== */
+
+#story .pucuk-bunga.kiri {
+  top: 4.9%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 0%;
+}
+
+#story .pucuk-bunga.kanan {
+  top: 4.9%;
+  pointer-events: none;
+  z-index: 0;
+  right: 0%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#story .rangkaian-bunga.atas-kiri {
+  top: 12%;
+  transform: translateY(-50%);
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#story .rangkaian-bunga.atas-kanan {
+  top: 12%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+}
+
+#story .bunga-mekar.kiri {
+  top: 95%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 5%;
+}
+
+#story .bunga-mekar.kanan {
+  top: 95%;
+  pointer-events: none;
+  z-index: 0;
+  right: 5%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#story .rangkaian-bunga.bawah-kiri {
+  top: 88%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1) scaleY(-1);
+}
+
+#story .rangkaian-bunga.bawah-kanan {
+  top: 88%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+  transform: translateY(-50%) scaley(-1);
+}
+
 .timeline {
   position: relative;
   max-width: 700px;
@@ -571,9 +726,8 @@ body.no-scroll {
   border-left: 2px solid var(--primary);
 }
 
-/* Hiasan hati berdenyut di ujung bawah garis timeline */
 .timeline::after {
-  content: "\f004"; /* fa-heart */
+  content: "\f004";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   position: absolute;
@@ -588,8 +742,6 @@ body.no-scroll {
   position: relative;
   margin-bottom: 32px;
   padding-left: 24px;
-
-  /* Reveal bertahap satu-per-satu saat masuk viewport (lihat script.js) */
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s ease, transform 0.7s ease;
@@ -640,7 +792,6 @@ body.no-scroll {
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
 }
 
-/* Nomor urut besar & transparan sebagai aksen dekoratif */
 .timeline-number {
   position: absolute;
   top: 6px;
@@ -678,14 +829,6 @@ body.no-scroll {
   z-index: 1;
   font-size: 0.9rem;
   color: var(--text-muted);
-}
-
-#story .section-side-flower-left {
-  top: 20%;
-}
-
-#story .section-side-flower-right {
-  top: 20%;
 }
 
 /* ==========================================
@@ -740,7 +883,6 @@ body.no-scroll {
   font-size: 0.95rem;
 }
 
-/* Baris tombol aksi: Simpan Kalender & Lihat Maps */
 .event-actions {
   position: relative;
   display: flex;
@@ -773,7 +915,6 @@ body.no-scroll {
   color: var(--white);
 }
 
-/* Dropdown pilihan kalender (Google Calendar / unduh .ics) */
 .calendar-dropdown {
   position: absolute;
   top: calc(100% + 10px);
@@ -852,12 +993,39 @@ body.no-scroll {
   background-color: var(--primary-dark);
 }
 
-#acara .section-side-flower-left {
-  top: 13%;
+/* ==========================================
+   COUNTDOWN
+   ========================================== */
+   
+.countdown-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+  margin-bottom: 36px;
 }
 
-#acara .section-side-flower-right {
-  top: 13%;
+.countdown-item {
+  background: var(--white);
+  padding: 16px;
+  min-width: 75px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(194, 89, 91, 0.1);
+}
+
+.countdown-item span {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: var(--font-title);
+}
+
+.countdown-item small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 
 /* ==========================================
@@ -932,14 +1100,6 @@ body.no-scroll {
 
 .lightbox-prev { left: 24px; }
 .lightbox-next { right: 24px; }
-
-#galeri .section-side-flower-left {
-  top: 55%;
-}
-
-#galeri .section-side-flower-right {
-  top: 55%;
-}
 
 /* ==========================================
    WEDDING GIFT (KARTU ATM)
@@ -1025,14 +1185,6 @@ body.no-scroll {
   background: var(--white);
   color: var(--primary);
   border-color: var(--white);
-}
-
-#gift .section-side-flower-left {
-  top: 35%;
-}
-
-#gift .section-side-flower-right {
-  top: 35%;
 }
 
 /* ==========================================
@@ -1200,14 +1352,6 @@ body.no-scroll {
 .wish-text {
   font-size: 0.9rem;
   color: var(--text-muted);
-}
-
-#rsvp .section-side-flower-left {
-  top: 12%;
-}
-
-#rsvp .section-side-flower-right {
-  top: 12%;
 }
 
 /* ==========================================

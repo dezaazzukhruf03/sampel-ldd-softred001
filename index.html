@@ -72,8 +72,9 @@
     <p class="wedding-date">Rabu, 31 Desember 2026</p>
     
     <div id="guest-container" class="guest-box hidden">
-      <p>Kepada Yth:</p>
+      <p class="guest-title">Kepada Yth:</p>
       <h3 id="guest-name">-</h3>
+      <p class="guest-note">*Mohon maaf bila ada kesalahan penulisan nama/gelar</p>
     </div>
 
     <button id="btn-open-invitation" class="btn-open">
@@ -86,26 +87,40 @@
   <main id="main-content" class="locked">
 
     <!-- 3. BERANDA -->
-    <section id="beranda" class="section fade-up-section">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
+    <section id="beranda" class="section bg-light fade-up-section">
+      <img src="assets/images/bunga-mekar.png" alt="" class="bunga-mekar kiri" aria-hidden="true">
+      <img src="assets/images/bunga-mekar.png" alt="" class="bunga-mekar kanan" aria-hidden="true">
+      <img src="assets/images/pucuk-bunga.png" alt="" class="pucuk-bunga kiri" aria-hidden="true">
+      <img src="assets/images/pucuk-bunga.png" alt="" class="pucuk-bunga kanan" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga atas-kiri" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga atas-kanan" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga bawah-kiri" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga bawah-kanan" aria-hidden="true">
       <div class="container text-center">
         <p class="subtitle">The Wedding of</p>
-
         <div class="beranda-photo-wrap">
           <div class="beranda-photo">
-            <img src="assets/images/coverB.png" alt="Sasuke & Sakuar">
-            <i class="fa-solid fa-spa beranda-photo-flower"></i>
+            <img src="assets/images/coverB.png" alt="Sasuke & Sakura">
+            <i class="fa-solid fa-spa beranda-photo"></i>
           </div>
-            <img src="assets/images/full-flower.png" alt="" class="beranda-photo-side-flower beranda-photo-side-flower-left" aria-hidden="true">
-            <img src="assets/images/full-flower.png" alt="" class="beranda-photo-side-flower beranda-photo-side-flower-right" aria-hidden="true">
-            <img src="assets/images/full-flower.png" alt="" class="beranda-photo-side-flower beranda-photo-side-flower-left beranda-photo-side-flower-top" aria-hidden="true">
-            <img src="assets/images/full-flower.png" alt="" class="beranda-photo-side-flower beranda-photo-side-flower-right beranda-photo-side-flower-bottom" aria-hidden="true">
         </div>
 
-        <h2 class="title-primary">Sasuke & Sakura</h2>
+        <h2 class="bride-groom-name">Sasuke & Sakura</h2>
         <p class="event-date">Rabu, 31 Desember 2026</p>
+      </div>
+    </section>
 
+    <!-- 4. MEMPELAI -->
+    <section id="mempelai" class="section bg-light fade-up-section">
+      <img src="assets/images/pucuk-bunga.png" alt="" class="pucuk-bunga kiri" aria-hidden="true">
+      <img src="assets/images/pucuk-bunga.png" alt="" class="pucuk-bunga kanan" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga atas-kiri" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga atas-kanan" aria-hidden="true">
+      <img src="assets/images/bunga-mekar.png" alt="" class="bunga-mekar kiri" aria-hidden="true">
+      <img src="assets/images/bunga-mekar.png" alt="" class="bunga-mekar kanan" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga bawah-kiri" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga bawah-kanan" aria-hidden="true">
+      <div class="container text-center">
         <div class="quotes-box">
           <i class="fa-solid fa-quote-left quote-icon"></i>
           <p class="quotes-text">
@@ -114,21 +129,6 @@
           <span class="quotes-author">(Q.S. Ar-Rum: 21)</span>
         </div>
 
-        <!-- Countdown Timer -->
-        <div id="countdown" class="countdown-wrapper">
-          <div class="countdown-item"><span id="days">00</span><small>Hari</small></div>
-          <div class="countdown-item"><span id="hours">00</span><small>Jam</small></div>
-          <div class="countdown-item"><span id="minutes">00</span><small>Menit</small></div>
-          <div class="countdown-item"><span id="seconds">00</span><small>Detik</small></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. MEMPELAI -->
-    <section id="mempelai" class="section fade-up-section">
-      <img src="assets/images/flower-crop-mid.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-mid.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
-      <div class="container text-center">
         <h2 class="section-title">Pasangan Mempelai</h2>
         <p class="section-subtitle">Mohon doa restu untuk pernikahan kami</p>
 
@@ -164,8 +164,14 @@
 
     <!-- 5. LOVE STORY (Plan A: Timeline) -->
     <section id="story" class="section bg-light fade-up-section">
-      <img src="assets/images/flower-crop-bottom.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-bottom.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
+      <img src="assets/images/pucuk-bunga.png" alt="" class="pucuk-bunga kiri" aria-hidden="true">
+      <img src="assets/images/pucuk-bunga.png" alt="" class="pucuk-bunga kanan" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga atas-kiri" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga atas-kanan" aria-hidden="true">
+      <img src="assets/images/bunga-mekar.png" alt="" class="bunga-mekar kiri" aria-hidden="true">
+      <img src="assets/images/bunga-mekar.png" alt="" class="bunga-mekar kanan" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga bawah-kiri" aria-hidden="true">
+      <img src="assets/images/rangkaian-bunga.png" alt="" class="rangkaian-bunga bawah-kanan" aria-hidden="true">
       <div class="container">
         <h2 class="section-title text-center">Kisah Cinta Kami</h2>
         <p class="section-subtitle text-center">Setiap pertemuan punya cerita, inilah perjalanan cinta kami</p>
@@ -205,16 +211,22 @@
     </section>
 
     <!-- 6. ACARA -->
-    <section id="acara" class="section fade-up-section">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
+    <section id="acara" class="section bg-light active fade-up-section">
       <div class="container text-center">
         <h2 class="section-title">Rangkaian Acara</h2>
+
+        <!-- Countdown Timer -->
+        <div id="countdown" class="countdown-wrapper">
+          <div class="countdown-item"><span id="days">00</span><small>Hari</small></div>
+          <div class="countdown-item"><span id="hours">00</span><small>Jam</small></div>
+          <div class="countdown-item"><span id="minutes">00</span><small>Menit</small></div>
+          <div class="countdown-item"><span id="seconds">00</span><small>Detik</small></div>
+        </div>
 
         <div class="event-grid">
           <div class="event-card">
             <div class="event-icon"><i class="fa-solid fa-mosque"></i></div>
-            <h3>Akad Nikah</h3>
+            <h3>Akad <br> Nikah</h3>
             <p class="event-time"><i class="fa-regular fa-clock"></i> 08.00 WIB - Selesai</p>
             <p class="event-day"><i class="fa-regular fa-calendar"></i> Rabu,31 Desember 2026</p>
 
@@ -238,7 +250,7 @@
 
           <div class="event-card">
             <div class="event-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
-            <h3>Resepsi</h3>
+            <h3>Resepsi <br> Pernikahan</h3>
             <p class="event-time"><i class="fa-regular fa-clock"></i> 11.00 WIB - Selesai</p>
             <p class="event-day"><i class="fa-regular fa-calendar"></i> Rabu, 31 Desember 2026</p>
 
@@ -284,8 +296,6 @@
 
     <!-- 7. GALERI -->
     <section id="galeri" class="section bg-light fade-up-section">
-      <img src="assets/images/flower-crop-mid.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-mid.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
       <div class="container text-center">
         <h2 class="section-title">Galeri Foto</h2>
 
@@ -315,9 +325,7 @@
     </div>
 
     <!-- 8. WEDDING GIFT -->
-    <section id="gift" class="section fade-up-section">
-      <img src="assets/images/flower-crop-bottom.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-bottom.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
+    <section id="gift" class="section bg-light active fade-up-section">
       <div class="container text-center">
         <h2 class="section-title">Tanda Kasih</h2>
         <p class="section-subtitle">Doa restu Anda adalah hadiah terindah. Namun jika ingin memberi hadiah, Anda dapat mengirimkannya melalui:</p>
@@ -350,8 +358,6 @@
 
     <!-- 9. RSVP & UCAPAN -->
     <section id="rsvp" class="section bg-light fade-up-section">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-left" aria-hidden="true">
-      <img src="assets/images/flower-crop-top.png" alt="" class="section-side-flower section-side-flower-right" aria-hidden="true">
       <div class="container">
         <h2 class="section-title text-center">RSVP & Ucapan</h2>
 
