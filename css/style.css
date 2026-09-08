@@ -320,7 +320,7 @@ body.no-scroll {
   pointer-events: none;
   z-index: 0;
   right: -10%;
-  transform: translateY(-50%) scaley(-1);
+  transform: translateY(-50%) scaleY(-1);
 }
 
 #beranda .beranda-photo-wrap {
@@ -413,6 +413,50 @@ body.no-scroll {
 
 .side-nav .music-toggle-btn {
   margin-bottom: 2px;
+}
+
+/* Wadah tombol auto-scroll + notifikasi kecil di atasnya */
+.autoscroll-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Notifikasi "Auto-Scroll Aktif" yang muncul di atas tombol
+   selama auto-scroll berjalan, supaya orang tahu kenapa halaman
+   bergerak sendiri. */
+.autoscroll-notice {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-dark);
+  color: var(--white);
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.autoscroll-notice::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--primary-dark);
+}
+
+.autoscroll-notice.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-2px);
 }
 
 .autoscroll-toggle-btn {
@@ -571,7 +615,7 @@ body.no-scroll {
   pointer-events: none;
   z-index: 0;
   right: -10%;
-  transform: translateY(-50%) scaley(-1);
+  transform: translateY(-50%) scaleY(-1);
 }
 
 .quotes-box {
@@ -580,6 +624,7 @@ body.no-scroll {
   padding: 24px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  border-top: 4px solid var(--primary);
   position: relative;
 }
 
@@ -715,7 +760,7 @@ body.no-scroll {
   pointer-events: none;
   z-index: 0;
   right: -10%;
-  transform: translateY(-50%) scaley(-1);
+  transform: translateY(-50%) scaleY(-1);
 }
 
 .timeline {
@@ -745,11 +790,13 @@ body.no-scroll {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  
 }
 
 .timeline-item.in-view {
   opacity: 1;
   transform: translateY(0);
+  
 }
 
 .timeline-item:last-child {
@@ -785,6 +832,7 @@ body.no-scroll {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid var(--primary);
 }
 
 .timeline-content:hover {
@@ -834,6 +882,73 @@ body.no-scroll {
 /* ==========================================
    RANGKAIAN ACARA & MAP
    ========================================== */
+
+#acara .pucuk-bunga.kiri {
+  top: 3.4%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 0%;
+}
+
+#acara .pucuk-bunga.kanan {
+  top: 3.4%;
+  pointer-events: none;
+  z-index: 0;
+  right: 0%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#acara .rangkaian-bunga.atas-kiri {
+  top: 8%;
+  transform: translateY(-50%);
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#acara .rangkaian-bunga.atas-kanan {
+  top: 8%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+}
+
+#acara .bunga-mekar.kiri {
+  top: 95%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 5%;
+}
+
+#acara .bunga-mekar.kanan {
+  top: 95%;
+  pointer-events: none;
+  z-index: 0;
+  right: 5%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#acara .rangkaian-bunga.bawah-kiri {
+  top: 90%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1) scaleY(-1);
+}
+
+#acara .rangkaian-bunga.bawah-kanan {
+  top: 90%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+  transform: translateY(-50%) scaleY(-1);
+}
+
 .event-grid {
   display: flex;
   gap: 24px;
@@ -1012,6 +1127,7 @@ body.no-scroll {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   border: 1px solid rgba(194, 89, 91, 0.1);
+  border-top: 4px solid var(--primary);
 }
 
 .countdown-item span {
@@ -1031,6 +1147,73 @@ body.no-scroll {
 /* ==========================================
    GALERI & LIGHTBOX
    ========================================== */
+
+#galeri .pucuk-bunga.kiri {
+  top: 3.5%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 0%;
+}
+
+#galeri .pucuk-bunga.kanan {
+  top: 3.5%;
+  pointer-events: none;
+  z-index: 0;
+  right: 0%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#galeri .rangkaian-bunga.atas-kiri {
+  top: 8%;
+  transform: translateY(-50%);
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#galeri .rangkaian-bunga.atas-kanan {
+  top: 8%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+}
+
+#galeri .bunga-mekar.kiri {
+  top: 95%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 5%;
+}
+
+#galeri .bunga-mekar.kanan {
+  top: 95%;
+  pointer-events: none;
+  z-index: 0;
+  right: 5%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#galeri .rangkaian-bunga.bawah-kiri {
+  top: 90%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1) scaleY(-1);
+}
+
+#galeri .rangkaian-bunga.bawah-kanan {
+  top: 90%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+  transform: translateY(-50%) scaleY(-1);
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1104,6 +1287,73 @@ body.no-scroll {
 /* ==========================================
    WEDDING GIFT (KARTU ATM)
    ========================================== */
+
+#gift .pucuk-bunga.kiri {
+  top: 6.2%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 0%;
+}
+
+#gift .pucuk-bunga.kanan {
+  top: 6.2%;
+  pointer-events: none;
+  z-index: 0;
+  right: 0%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#gift .rangkaian-bunga.atas-kiri {
+  top: 16%;
+  transform: translateY(-50%);
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#gift .rangkaian-bunga.atas-kanan {
+  top: 16%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+}
+
+#gift .bunga-mekar.kiri {
+  top: 95%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 5%;
+}
+
+#gift .bunga-mekar.kanan {
+  top: 95%;
+  pointer-events: none;
+  z-index: 0;
+  right: 5%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#gift .rangkaian-bunga.bawah-kiri {
+  top: 86%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1) scaleY(-1);
+}
+
+#gift .rangkaian-bunga.bawah-kanan {
+  top: 86%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+  transform: translateY(-50%) scaleY(-1);
+}
+
 .atm-grid {
   display: flex;
   justify-content: center;
@@ -1190,6 +1440,73 @@ body.no-scroll {
 /* ==========================================
    RSVP & UCAPAN
    ========================================== */
+
+#rsvp .pucuk-bunga.kiri {
+  top: 4%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 0%;
+}
+
+#rsvp .pucuk-bunga.kanan {
+  top: 4%;
+  pointer-events: none;
+  z-index: 0;
+  right: 0%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#rsvp .rangkaian-bunga.atas-kiri {
+  top: 10%;
+  transform: translateY(-50%);
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#rsvp .rangkaian-bunga.atas-kanan {
+  top: 10%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+}
+
+#rsvp .bunga-mekar.kiri {
+  top: 96%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: 5%;
+}
+
+#rsvp .bunga-mekar.kanan {
+  top: 96%;
+  pointer-events: none;
+  z-index: 0;
+  right: 5%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+#rsvp .rangkaian-bunga.bawah-kiri {
+  top: 90%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  left: -10%;
+  transform: translateY(-50%) scaleX(-1) scaleY(-1);
+}
+
+#rsvp .rangkaian-bunga.bawah-kanan {
+  top: 90%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  right: -10%;
+  transform: translateY(-50%) scaleY(-1);
+}
+
 .rsvp-form {
   background: var(--white);
   padding: 28px;
@@ -1197,6 +1514,7 @@ body.no-scroll {
   box-shadow: var(--shadow);
   max-width: 600px;
   margin: 0 auto 40px;
+  border-top: 4px solid var(--primary);
 }
 
 .form-group {
@@ -1257,6 +1575,7 @@ body.no-scroll {
   border-radius: var(--radius);
   padding: 10px 4px;
   text-align: center;
+    border-top: 4px solid var(--primary);
 }
 
 .rsvp-stat-item span {
@@ -1289,6 +1608,7 @@ body.no-scroll {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   text-align: left;
+  
 }
 
 .wish-time {
@@ -1379,7 +1699,7 @@ body.no-scroll {
 
 .footer {
   text-align: center;
-  padding: 40px 20px 110px;
+  padding: 50px 20px 120px;
   background: var(--white);
   border-top: 1px solid #eee;
 }
@@ -1403,4 +1723,8 @@ body.no-scroll {
   opacity: 0.5;
   vertical-align: middle;
   margin: 0 4px;
+}
+.credit{
+  font-size: 0.7rem;
+  color: var(--primary);
 }

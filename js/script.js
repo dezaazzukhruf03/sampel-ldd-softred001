@@ -2,7 +2,16 @@
    MAIN SCRIPT (Softred 001)
    ========================================== */
 
+// Cegah browser mengembalikan posisi scroll terakhir saat halaman
+// di-refresh/dibuka ulang — supaya web selalu mulai dari atas (Beranda).
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+
+  // Jaga-jaga tambahan: pastikan halaman mulai dari paling atas.
+  window.scrollTo(0, 0);
 
   // ------------------------------------------
   // 0. FADE UP SECTION SAAT MASUK VIEWPORT
@@ -54,50 +63,46 @@ document.addEventListener('DOMContentLoaded', function () {
   // 0b. AUTO SCROLL PERLAHAN
   //     Dipakai saat "Buka Undangan" diklik, DAN oleh tombol
   //     Auto-Scroll manual (#autoscroll-btn).
-  //     Auto-scroll TETAP JALAN walau layar disentuh/discroll manual —
-  //     hanya berhenti/mulai lewat klik tombol #autoscroll-btn.
+  //     Auto-scroll bergerak dengan menambah posisi scroll SEDIKIT demi
+  //     sedikit tiap frame (relatif), bukan memaksa ke posisi absolut —
+  //     jadi kalau layar disentuh/discroll manual di tengah animasi,
+  //     auto-scroll otomatis melanjutkan dari posisi baru itu (tidak
+  //     dilawan/ditarik balik).
   // ------------------------------------------
   const autoScrollBtn = document.getElementById('autoscroll-btn');
+  const autoScrollNotice = document.getElementById('autoscroll-notice');
   let stopActiveAutoScroll = null; // referensi fungsi stop dari sesi auto-scroll yang sedang berjalan
   let isAutoScrolling = false;
 
   function setAutoScrollButtonState(active) {
     isAutoScrolling = active;
+    if (autoScrollNotice) {
+      autoScrollNotice.classList.toggle('show', active);
+    }
     if (!autoScrollBtn) return;
     autoScrollBtn.classList.toggle('active', active);
     autoScrollBtn.innerHTML = active
       ? '<i class="fa-solid fa-pause"></i>'
-      : '<i class="fa-solid fa-arrow-down-long"></i>';
+      : '<i class="fa-solid fa-angles-down"></i>';
     autoScrollBtn.title = active ? 'Hentikan Auto-Scroll' : 'Mulai Auto-Scroll';
   }
 
-  function smoothAutoScroll(targetY, duration, onEnd) {
+  // speed: kecepatan scroll dalam px per detik (semakin kecil = semakin
+  // perlahan & khidmat). targetY: batas akhir scroll (opsional). Kalau
+  // tidak diisi, auto-scroll akan jalan sampai paling bawah halaman.
+  function startAutoScroll(targetY, speed) {
     // Jika ada sesi auto-scroll lain yang masih jalan, hentikan dulu
     if (stopActiveAutoScroll) stopActiveAutoScroll();
 
-    const htmlEl = document.documentElement;
-    const previousScrollBehavior = htmlEl.style.scrollBehavior;
-
-    // Matikan scroll-behavior:smooth CSS sementara, supaya tidak
-    // bentrok/rebutan kontrol dengan animasi custom (requestAnimationFrame) ini.
-    htmlEl.style.scrollBehavior = 'auto';
-
-    const startY = window.scrollY;
-    const distance = targetY - startY;
-    const startTime = performance.now();
+    const scrollSpeed = speed || 40;
+    let lastTime = performance.now();
     let cancelled = false;
-
-    function restoreScrollBehavior() {
-      htmlEl.style.scrollBehavior = previousScrollBehavior;
-    }
 
     function stopAutoScroll() {
       if (cancelled) return;
       cancelled = true;
-      restoreScrollBehavior();
       stopActiveAutoScroll = null;
       setAutoScrollButtonState(false);
-      if (typeof onEnd === 'function') onEnd();
     }
 
     stopActiveAutoScroll = stopAutoScroll;
@@ -105,20 +110,24 @@ document.addEventListener('DOMContentLoaded', function () {
     function step(now) {
       if (cancelled) return;
 
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // easeInOutQuad
-      const eased = progress < 0.5
-        ? 2 * progress * progress
-        : -1 + (4 - 2 * progress) * progress;
+      const dt = (now - lastTime) / 1000;
+      lastTime = now;
 
-      window.scrollTo(0, startY + distance * eased);
+      const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+      const effectiveTarget = (typeof targetY === 'number') ? Math.min(targetY, maxScroll) : maxScroll;
 
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
+      // Sudah sampai (atau terlewati karena user scroll manual duluan)
+      if (window.scrollY >= effectiveTarget - 1) {
         stopAutoScroll();
+        return;
       }
+
+      // Tambah posisi scroll sedikit demi sedikit dari posisi SAAT INI
+      // (bukan dari posisi awal), supaya scroll manual di tengah jalan
+      // tetap terpakai/tidak dilawan.
+      window.scrollBy({ top: scrollSpeed * dt, left: 0, behavior: 'auto' });
+
+      requestAnimationFrame(step);
     }
 
     requestAnimationFrame(step);
@@ -145,10 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      const scrollSpeed = 40; // px per detik (semakin kecil = semakin perlahan & khidmat)
-      const duration = Math.max((remaining / scrollSpeed) * 1000, 5000);
-
-      smoothAutoScroll(maxScroll, duration);
+      startAutoScroll(); // tanpa target = sampai paling bawah
     });
   }
 
@@ -182,6 +188,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (btnOpen) {
     btnOpen.addEventListener('click', function () {
+      // 0. Pastikan selalu mulai dari paling atas (Beranda), jaga-jaga
+      //    kalau browser masih menyimpan posisi scroll sesi sebelumnya.
+      window.scrollTo(0, 0);
+
       // 1. Animasi keluar untuk Cover Screen
       if (coverScreen) {
         coverScreen.classList.add('slide-up-fade');
@@ -208,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (giftSection) {
         const targetY = giftSection.offsetTop + giftSection.offsetHeight - window.innerHeight;
         setTimeout(() => {
-          smoothAutoScroll(Math.max(targetY, 0), 90000);
+          startAutoScroll(Math.max(targetY, 0));
         }, 500);
       }
     });
